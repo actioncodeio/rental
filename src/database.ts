@@ -14,13 +14,7 @@ export class Database implements IDatabase {
   async connect(): Promise<Client | Error> {
     this.client = knex({
       client: 'pg',
-      connection: {
-        host : 'localhost',
-        port : 5422,
-        user : 'docker',
-        password : 'docker',
-        database : 'condos_db_dev'
-      },
+      connection: this.config?.connection
     })
 
     try {
@@ -28,8 +22,12 @@ export class Database implements IDatabase {
 
       return this.client
     } catch (err) {
-      return new Error(`Can't connect to database! ${err}`)
+      new Error(`Can't connect to database! ${err}`)
+      return false
     }
+  }
+
+  async closeConnection(): Promise<void> {
   }
 
   async isConnected(): Promise<Boolean | Error> {
