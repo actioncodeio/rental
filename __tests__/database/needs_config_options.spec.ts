@@ -21,7 +21,7 @@ describe('Database', () => {
     expect(db.config).toMatchObject(configOptions)
   })
 
-  it('desconnects from database when .closeConnection', async () => {
+  it('disconnects from database when .closeConnection', async () => {
     const configOptions: ConfigOptions = {
       connection: {
         host: 'localhost',

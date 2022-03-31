@@ -5,5 +5,5 @@ export interface IDatabase {
   client: null | Client
   connect: () => Promise<Client | Error>
   isConnected: () => Promise<Boolean | Error>
-  closeConnection: () => Promise<void>
+  closeConnection: () => Promise<void | Error>
 }

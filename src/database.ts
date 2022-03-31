@@ -4,7 +4,7 @@ import knex from 'knex'
 
 export class Database implements IDatabase {
   public config: ConfigOptions | null
-  public client: null | any
+  public client: null | Client
 
   constructor(config: ConfigOptions) {
     this.config = config
@@ -18,25 +18,24 @@ export class Database implements IDatabase {
     })
 
     try {
-      await this.client.raw("SELECT 1")
+      await this.isConnected()
 
       return this.client
     } catch (err) {
-      new Error(`Can't connect to database! ${err}`)
-      return false
+      return new Error(`Can't connect to database! ${err}`)
     }
   }
 
   async closeConnection(): Promise<void> {
+    await this.client?.destroy()
   }
 
-  async isConnected(): Promise<Boolean | Error> {
+  async isConnected(): Promise<Boolean> {
     try {
-      return await this.client.raw("SELECT 1").then(() => {
-        return true
-      })
+      await this.client?.raw("SELECT 1")
+      return true
     } catch (err) {
-      return new Error(`Database is not connected! ${err}`)
+      return false
     }
   }
 }
