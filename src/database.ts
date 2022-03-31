@@ -12,10 +12,12 @@ export class Database implements IDatabase {
   }
 
   async connect(): Promise<Client | Error> {
-    this.client = knex({
+    const driver = knex({
       client: 'pg',
       connection: this.config?.connection
-    })
+    }) as unknown
+
+    this.client = driver as Client
 
     try {
       await this.isConnected()

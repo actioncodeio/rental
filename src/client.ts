@@ -5,6 +5,10 @@ export class Client implements IClient {
     return query
   }
 
+  async insert(): Promise<Error> {
+    throw new Error('Must implement it')
+  }
+
   async destroyConnection(): Promise<void> {
   }
 }

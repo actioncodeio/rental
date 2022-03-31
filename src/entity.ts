@@ -1,23 +1,15 @@
-export class Entity<T> {
-  async insert(options: T): Promise<void>{
-    console.log('chegou aqui', options)
+import { getClient } from './rental'
+
+export class Repo<T> {
+  async insert(options: T): Promise<T>{
+    const client = await getClient()
+
+    if(client) {
+      await client.insert()
+    }
+
+    // return options as T
+    throw new Error('Must implement it')
   }
 }
 
-
-
-type TUser = {
-  id: number
-  name: string
-}
-
-export class User extends Entity<User> {
-  public id: number | undefined
-  public name: string | undefined
-
-  constructor({ id, name }: TUser) {
-    super()
-    this.id = id
-    this.name = name
-  }
-}
