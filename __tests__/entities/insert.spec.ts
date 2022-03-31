@@ -18,18 +18,17 @@ type TUser = {
   name: string
 }
 
-export class StubUser extends Repo<StubUser> {
+export class StubUser {
   public id: number | undefined
   public name: string | undefined
 
   constructor({ id, name }: TUser) {
-    super()
     this.id = id
     this.name = name
   }
 }
 
-describe('Entity', () => {
+describe('Repo', () => {
   it('must receive an Entity', async () => {
     const user = new StubUser({ name: "mateus" })
     const repo = new Repo<StubUser>()

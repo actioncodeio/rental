@@ -1,3 +1,5 @@
 export * from './configOptions'
 export * from './client'
 export * from './entity'
+export * from './column'
+export * from './table'

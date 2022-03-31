@@ -4,6 +4,6 @@ export type ConfigOptions = {
     port: 5422
     user: string
     password: string
-    databaseName: string
+    database?: string
   }
 }

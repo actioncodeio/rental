@@ -8,8 +8,8 @@ export class Repo<T> {
       await client.insert()
     }
 
-    // return options as T
-    throw new Error('Must implement it')
+    return options as T
+    // throw new Error('Must implement it')
   }
 }
 

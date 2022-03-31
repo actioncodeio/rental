@@ -9,7 +9,7 @@ describe('Database', () => {
         port: 5422,
         user: 'docker',
         password: 'docker',
-        databaseName: 'condos_db_dev',
+        database: 'condos_db_dev',
       }
     }
     const db = new Database(configOptions)
@@ -19,6 +19,8 @@ describe('Database', () => {
     expect(await db.isConnected()).toEqual(true)
     expect(db.client).not.toBeNull()
     expect(db.config).toMatchObject(configOptions)
+
+    await db.closeConnection()
   })
 
   it('disconnects from database when .closeConnection', async () => {
@@ -28,7 +30,7 @@ describe('Database', () => {
         port: 5422,
         user: 'docker',
         password: 'docker',
-        databaseName: 'condos_db_dev',
+        database: 'condos_db_dev',
       }
     }
     const db = new Database(configOptions)
@@ -39,6 +41,8 @@ describe('Database', () => {
       await db.closeConnection()
 
       expect(await db.isConnected()).toEqual(false)
+      await db.closeConnection()
+
     }
   })
 
